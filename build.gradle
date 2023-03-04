@@ -1,0 +1,135 @@
+buildscript {
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        // Make sure this version matches the one included in Kotlin for Forge
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.21'
+        // OPTIONAL Gradle plugin for Kotlin Serialization
+        classpath 'org.jetbrains.kotlin:kotlin-serialization:1.7.21'
+    }
+}
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'kotlin'
+apply plugin: 'kotlinx-serialization'
+
+ext.kotlin_version = '1.7.21'
+ext.coroutines_version = '1.6.4'
+ext.serialization_version = '1.4.1'
+
+project.properties['kotlin.stdlib.default.dependency'] = false
+
+//apply from: 'https://raw.githubusercontent.com/thedarkcolour/KotlinForForge/site/thedarkcolour/kotlinforforge/gradle/kff-3.8.0.gradle'
+
+version = '0.0.0'
+group = 'com.LubieKakao1212.essencealchemy'
+archivesBaseName = 'essencealchemy'
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+configurations {
+    library
+}
+
+minecraft.runs.all {
+    lazyToken('minecraft_classpath') {
+        configurations.library.copyRecursive().resolve().collect { it.absolutePath }.join(File.pathSeparator)
+    }
+}
+
+minecraft {
+    // Change to your preferred mappings
+    mappings channel: 'official', version: '1.18.2'
+    // Add your AccessTransformer
+    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+
+    runs {
+        client {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'SCAN,LOADING,CORE'
+            property 'forge.logging.console.level', 'debug'
+
+            //jvmArgs '--add-modules', '', '--add-reads', 'kotlin.stdlib=kotlinx.coroutines.core.jvm'
+
+            mods {
+                essencealchemy {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file('run/server')
+
+            property 'forge.logging.markers', 'SCAN,LOADING,CORE'
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                essencealchemy {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        data {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'SCAN,LOADING,CORE'
+            property 'forge.logging.console.level', 'debug'
+
+            args '--mod', 'essencealchemy', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources')
+
+            mods {
+                essencealchemy {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+// Include assets and data from data generators
+sourceSets.main.resources { srcDirs 'src/generated/resources/' }
+
+repositories {
+    maven {
+        name = 'Kotlin for Forge'
+        url = 'https://thedarkcolour.github.io/KotlinForForge/'
+    }
+}
+
+dependencies {
+    // Use the latest version of Minecraft Forge
+    minecraft 'net.minecraftforge:forge:1.18.2-40.0.4'
+
+    implementation 'thedarkcolour:kotlinforforge:3.8.0'
+
+    groovy.lang.Closure exclude_annotations = { exclude group: 'org.jetbrains', module: 'annotations' }
+
+    library(group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk8', version: kotlin_version, exclude_annotations)
+    library(group: 'org.jetbrains.kotlin', name: 'kotlin-reflect', version: kotlin_version, exclude_annotations)
+    library(group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-core', version: coroutines_version, exclude_annotations)
+    library(group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-jdk8', version: coroutines_version, exclude_annotations)
+    library(group: 'org.jetbrains.kotlinx', name: 'kotlinx-serialization-json', version: serialization_version, exclude_annotations)
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "17"
+}
+
+jar {
+    manifest {
+        attributes([
+                'Specification-Title': "essencealchemy",
+                'Specification-Vendor': "examplemodsareus",
+                'Specification-Version': "1", // We are version 1 of ourselves
+                'Implementation-Title': project.name,
+                'Implementation-Version': project.version,
+                'Implementation-Vendor' :"examplemodsareus",
+                'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+}

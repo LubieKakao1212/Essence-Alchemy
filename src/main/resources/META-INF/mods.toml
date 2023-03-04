@@ -1,0 +1,27 @@
+# Make sure this is set to "kotlinforforge"
+modLoader="kotlinforforge"
+# Make sure this is set to the appropriate version range
+loaderVersion="[3,)" # Require at least 3.x
+# License is REQUIRED after 1.16
+license='MIT'
+
+[[mods]]
+modId="essencealchemy"
+version="${file.jarVersion}"
+displayName="Essence Alchemy"
+credits=""
+authors="LubieKakao1212"
+description='''
+'''
+[[dependencies.essencealchemy]]
+    modId="forge"
+    mandatory=true
+    versionRange="[39,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.essencealchemy]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.18.2]"
+    ordering="NONE"
+    side="BOTH"
