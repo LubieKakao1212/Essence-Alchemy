@@ -15,7 +15,10 @@ abstract class Coating : ForgeRegistryEntry<Coating>() {
 
     open fun getBlockBreakSpeedModifier(coatedItem : ICoatingInstance, breaker : LivingEntity, blockPos : BlockPos, block : BlockState) : Double { return 1.0 }
 
-    open fun canMerge(other : Coating) : Boolean {
-        return other === this;
-    }
+    open fun canMerge(other : Coating) : Boolean { return other === this }
+
+    /**
+     * @return what coating is the result of this merge
+     */
+    open fun merge(other : Coating) : Coating { return this }
 }

@@ -14,4 +14,6 @@ interface ICoatingInstance {
      */
     fun use() :  Boolean
 
+    fun apply(coating: Coating, uses : Int) : Boolean
+
 }

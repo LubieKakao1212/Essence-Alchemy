@@ -33,6 +33,20 @@ class ItemCoatingInstance(private val item : ItemStack, coatingIn : Coating, use
         return true;
     }
 
+    override fun apply(coatingIn: Coating, uses: Int): Boolean {
+        if(coating.canMerge(coatingIn)) {
+            coating = coating.merge(coatingIn)
+            usesLeft += uses
+            return true
+        }
+        return false
+    }
+
+    fun clear() {
+        usesLeft = 0
+        coating = Coatings.NO_COATING
+    }
+
     fun mergeWith(other : ItemCoatingInstance) : Boolean {
         if(coating.canMerge(other.coating)) {
             this.usesLeft += other.usesLeft

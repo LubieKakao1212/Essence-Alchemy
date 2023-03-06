@@ -33,7 +33,7 @@ object Coatings {
 
     val DECAY_I by REGISTER.registerObject("decay_1") {
         MobEffectCoating(MobEffectInstance(MobEffects.POISON, 60, 0))
-        MobEffectCoating(MobEffectInstance(MobEffects.WITHER, 20, 0))
+        MobEffectCoating(MobEffectInstance(MobEffects.WITHER, 40, 0))
     }
 
     val MAGIC_I by REGISTER.registerObject("magic_1") {
