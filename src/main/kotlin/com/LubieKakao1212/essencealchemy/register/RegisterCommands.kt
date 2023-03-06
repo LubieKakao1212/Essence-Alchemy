@@ -1,6 +1,6 @@
-package example.examplemod.init
+package com.LubieKakao1212.essencealchemy.register
 
-import example.examplemod.commands.EssenceCommand
+import com.LubieKakao1212.essencealchemy.commands.EssenceCommand
 import net.minecraftforge.event.RegisterCommandsEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber

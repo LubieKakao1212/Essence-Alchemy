@@ -1,6 +1,6 @@
 package com.LubieKakao1212.essencealchemy.coating
 
-class NoCoating : Coating()
+class NoCoating : Coating(Properties())
 {
     override fun canMerge(other: Coating): Boolean {
         return true

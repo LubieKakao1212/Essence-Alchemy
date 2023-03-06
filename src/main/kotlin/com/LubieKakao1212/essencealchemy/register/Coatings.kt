@@ -24,20 +24,35 @@ object Coatings {
     }
 
     val POISON_I by REGISTER.registerObject("poison_1") {
-        MobEffectCoating(MobEffectInstance(MobEffects.POISON, 60, 0))
+        MobEffectCoating(
+            Coating.Properties()
+                .setColor(Color.fromRGB(0.2f, 0.6f, 0.2f, 1f)
+                ),
+            MobEffectInstance(MobEffects.POISON, 60, 0))
     }
 
     val POISON_II by REGISTER.registerObject("poison_2") {
-        MobEffectCoating(MobEffectInstance(MobEffects.POISON, 40, 1))
+        MobEffectCoating(
+            Coating.Properties()
+                .setColor(Color.fromRGB(0.2f, 0.6f, 0.2f, 1f)
+                ),
+            MobEffectInstance(MobEffects.POISON, 40, 1))
     }
 
     val DECAY_I by REGISTER.registerObject("decay_1") {
-        MobEffectCoating(MobEffectInstance(MobEffects.POISON, 60, 0))
-        MobEffectCoating(MobEffectInstance(MobEffects.WITHER, 40, 0))
+        MobEffectCoating(
+            Coating.Properties()
+                .setColor(Color.fromRGB(0.2f, 0.3f, 0f, 1f)
+                ),
+            MobEffectInstance(MobEffects.POISON, 60, 0),
+            MobEffectInstance(MobEffects.WITHER, 40, 0))
     }
 
     val MAGIC_I by REGISTER.registerObject("magic_1") {
-        MobEffectCoating(MobEffectInstance(MobEffects.HARM, 1, 0))
+        MobEffectCoating(Coating.Properties()
+                .setColor(Color.fromRGB(0.6f, 0.2f, 0f, 1f)
+                ),
+            MobEffectInstance(MobEffects.HARM, 1, 0))
     }
 
 }

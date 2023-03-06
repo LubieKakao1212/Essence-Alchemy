@@ -1,15 +1,11 @@
-package example.examplemod.event
+package com.LubieKakao1212.essencealchemy.event
 
 import com.LubieKakao1212.essencealchemy.capability.EssAlcCapabilities
-import net.minecraft.nbt.Tag
-import net.minecraft.resources.ResourceLocation
-import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.entity.LivingEntity
 import net.minecraftforge.event.entity.living.LivingAttackEvent
-import net.minecraftforge.event.entity.living.LivingEvent
+import net.minecraftforge.event.entity.player.ItemTooltipEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber
-import net.minecraftforge.registries.ForgeRegistries
 
 @EventBusSubscriber
 object CoatingsEventHandler {
@@ -31,6 +27,14 @@ object CoatingsEventHandler {
                     }
                 }
             }
+        }
+    }
+
+    @SubscribeEvent
+    fun itemTooltip(event : ItemTooltipEvent) {
+        event.itemStack.getCapability(EssAlcCapabilities.COATING).ifPresent {coating ->
+            if(coating.isCoated)
+                event.toolTip.add(coating.coating.getCoatingName(coating).append(" ${coating.usesLeft}"))
         }
     }
 }

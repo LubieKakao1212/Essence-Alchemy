@@ -1,10 +1,10 @@
-package example.examplemod.commands
+package com.LubieKakao1212.essencealchemy.commands
 
 import com.LubieKakao1212.essencealchemy.capability.EssAlcCapabilities
+import com.LubieKakao1212.essencealchemy.commands.argument.RegistryArgument
 import com.LubieKakao1212.essencealchemy.register.Coatings
 import com.mojang.brigadier.CommandDispatcher
 import com.mojang.brigadier.arguments.IntegerArgumentType
-import example.examplemod.commands.argument.*
 import net.minecraft.ChatFormatting
 import net.minecraft.commands.CommandSourceStack
 import net.minecraft.commands.Commands
