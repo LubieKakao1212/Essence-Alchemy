@@ -9,7 +9,5 @@ class NoCoating : Coating(Properties())
     /**
      * @return what coating is the result of this merge
      */
-    override fun merge(other: Coating): Coating {
-        return other
-    }
+    override fun apply(thisIn : CoatingInstance, otherIn : CoatingInstance) : Boolean { return true }
 }

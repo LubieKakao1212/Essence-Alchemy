@@ -11,7 +11,7 @@ import net.minecraftforge.common.util.LazyOptional
 
 class ItemCoatingProvider(stack : ItemStack) : ICapabilityProvider {
 
-    private val coating : LazyOptional<ItemCoatingInstance> = LazyOptional.of { ItemCoatingInstance.createForStack(stack) }
+    private val coating : LazyOptional<ItemCoatingInstance> = LazyOptional.of { ItemCoatingInstance(stack) }
 
     override fun <T : Any?> getCapability(cap: Capability<T>, side: Direction?): LazyOptional<T> {
         if(cap == EssAlcCapabilities.COATING) {

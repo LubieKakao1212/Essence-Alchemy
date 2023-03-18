@@ -23,18 +23,19 @@ object CoatingsEventHandler {
                 }
                 item.getCapability(EssAlcCapabilities.COATING).ifPresent {coating ->
                     if(coating.isCoated) {
-                        coating.coating.hitEntity(coating, sourceEntity, event.entityLiving)
+                        coating.coating.coating.hitEntity(coating.coating, sourceEntity, event.entityLiving)
                     }
                 }
             }
         }
     }
 
+    //°¤*Ø∅⊗֍•█▓▒░
     @SubscribeEvent
     fun itemTooltip(event : ItemTooltipEvent) {
         event.itemStack.getCapability(EssAlcCapabilities.COATING).ifPresent {coating ->
             if(coating.isCoated)
-                event.toolTip.add(coating.coating.getCoatingName(coating).append(" ${coating.usesLeft}"))
+                event.toolTip.add(coating.coating.coating.getCoatingName(coating.coating).append(" ${coating.coating.usesLeft} °¤*Ø∅⊗֍•█▓▒░"))
         }
     }
 }

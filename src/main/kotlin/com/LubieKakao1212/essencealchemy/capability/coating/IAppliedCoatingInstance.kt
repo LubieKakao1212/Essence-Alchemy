@@ -1,19 +1,20 @@
 package com.LubieKakao1212.essencealchemy.capability.coating
 
 import com.LubieKakao1212.essencealchemy.coating.Coating
+import com.LubieKakao1212.essencealchemy.coating.CoatingInstance
 
-interface ICoatingInstance {
+interface IAppliedCoatingInstance {
 
     val isCoated : Boolean
 
-    val coating : Coating
-    val usesLeft : Int
+    val coating : CoatingInstance
 
     /**
+     * Decreases uses left by one
      * @return does this coating have any uses left
      */
     fun use() :  Boolean
 
-    fun apply(coating: Coating, uses : Int) : Boolean
+    fun apply(coatingIn : CoatingInstance) : Boolean
 
 }
